@@ -93,12 +93,17 @@ def send_key_email(email: str, name: str, key: str, plan: str):
     msg.attach(MIMEText(html, "html"))
     
     try:
+        print(f"[EMAIL] Attempting to send to {email}...")
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
             server.login(GMAIL_USER, GMAIL_PASS)
             server.sendmail(GMAIL_USER, email, msg.as_string())
-        print(f"[EMAIL] Sent key to {email}")
+        print(f"[EMAIL] Successfully sent to {email}")
+    except smtplib.SMTPAuthenticationError as e:
+        print(f"[EMAIL] Auth error - check Gmail app password: {e}")
+    except smtplib.SMTPException as e:
+        print(f"[EMAIL] SMTP error: {e}")
     except Exception as e:
-        print(f"[EMAIL] Error: {e}")
+        print(f"[EMAIL] Unexpected error: {e}")
 
 @app.post("/webhook/gumroad")
 async def gumroad_webhook(request: Request, background_tasks: BackgroundTasks):
