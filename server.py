@@ -43,7 +43,7 @@ def send_key_email(email: str, name: str, key: str, plan: str):
     try:
         print(f"[EMAIL] Sending to {email}...")
         r = resend.Emails.send({
-            "from": "ClickFree AI <onboarding@resend.dev>",
+            "from": "ClickFree AI <hello@clickfreeai.com>",
             "to": [email],
             "subject": f"Your ClickFree AI {plan_name} License Key",
             "html": f"""
