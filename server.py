@@ -163,3 +163,12 @@ async def validate_key(key: str, machine_id: str = ""):
 @app.get("/health")
 def health():
     return {"status": "ok"}
+
+@app.get("/check-env")
+def check_env():
+    gmail_user = os.environ.get("GMAIL_USER", "NOT SET")
+    gmail_pass = os.environ.get("GMAIL_PASS", "NOT SET")
+    return {
+        "GMAIL_USER": gmail_user,
+        "GMAIL_PASS": "SET" if gmail_pass != "NOT SET" else "NOT SET"
+    }
