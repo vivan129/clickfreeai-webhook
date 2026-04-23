@@ -106,7 +106,7 @@ def send_key_email(email: str, name: str, key: str, plan: str):
         print(f"[EMAIL] Unexpected error: {e}")
 
 @app.post("/webhook/gumroad")
-async def gumroad_webhook(request: Request, background_tasks: BackgroundTasks):
+async def gumroad_webhook(request: Request):
     try:
         body = await request.form()
         data = dict(body)
@@ -126,7 +126,7 @@ async def gumroad_webhook(request: Request, background_tasks: BackgroundTasks):
         
         # Generate and send key
         key = generate_key(plan)
-        background_tasks.add_task(send_key_email, email, name, key, plan)
+        send_key_email(email, name, key, plan)
         
         print(f"[WEBHOOK] Generated {plan} key for {email}: {key}")
         return {"success": True}
