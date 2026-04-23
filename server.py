@@ -94,7 +94,9 @@ def send_key_email(email: str, name: str, key: str, plan: str):
     
     try:
         print(f"[EMAIL] Attempting to send to {email}...")
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+        with smtplib.SMTP("smtp.gmail.com", 587, timeout=10) as server:
+            server.ehlo()
+            server.starttls()
             server.login(GMAIL_USER, GMAIL_PASS)
             server.sendmail(GMAIL_USER, email, msg.as_string())
         print(f"[EMAIL] Successfully sent to {email}")
