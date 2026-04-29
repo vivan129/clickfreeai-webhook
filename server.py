@@ -59,7 +59,7 @@ def send_key_email(email: str, name: str, key: str, plan: str):
                 </div>
                 <h3>How to activate:</h3>
                 <ol style="line-height:2;">
-                    <li>Download ClickFree AI from <a href="https://zerouipro.vercel.app">zerouipro.vercel.app</a></li>
+                    <li>Download ClickFree AI from <a href="https://clickfreeai.com">clickfreeai.com</a></li>
                     <li>Open the app and go to the <strong>License</strong> tab</li>
                     <li>Enter your key and click <strong>Activate</strong></li>
                     <li>Enjoy {"unlimited" if plan == "lifetime" else "Pro"} access!</li>
